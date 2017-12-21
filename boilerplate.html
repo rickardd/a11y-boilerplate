@@ -66,8 +66,6 @@
 
             // this.hasFocus = false;
 
-            
-
             children[i].addEventListener('blur', function( e ){
               this.close();
               this.hasFocus = false;
@@ -103,14 +101,8 @@
             }
             
           }.bind(this));
-        }
-        
+        } 
       }
-
-      // A11yMenu.prototype.handleOpenClose = function(){
-      //   console.log('open');
-      //   this.el.classList.remove('a11y-sr-only');
-      // }
 
       A11yMenu.prototype.open = function(){
         console.log('open');
@@ -125,16 +117,57 @@
           // this.hasFocus = false;
         }
 
-        debugger;
       }
 
       window.App.A11yMenu = A11yMenu;
       
-    })( window, document, jQuery )
+    })( window, document, jQuery );
+
+
+
+    /**
+     * Native Select for Quick menu
+     * Sets focus to a part of the page on change. 
+     *
+     * @param {Type}     window -  Description
+     * @param {Type}     window.document -  Description
+     * @param {Type}     Parameter Name -  Description
+     *
+     * @return {Void}
+     */
+    ( function( win, doc, $ ) {
+
+      A11ySelectMenu = function( idSelector ){
+        this.el = doc.querySelector( idSelector );
+        this.$el = $(this.el);
+        this.bind();
+      }
+      
+      A11ySelectMenu.prototype.bind = function(){
+        this.el.addEventListener('change', function( e ){
+            this.navigate( e.target.value );
+        }.bind(this));
+      }
+
+      A11ySelectMenu.prototype.navigate = function( navigateTarget ){
+        var isIdTarget = navigateTarget.indexOf('#') === 0;
+        if ( isIdTarget ) {
+          doc.querySelector( navigateTarget ).focus();
+          console.log('id focus', doc.querySelector( navigateTarget ));
+        }
+        else{
+          win.location.href = navigateTarget;
+        }
+      }
+
+      window.App.A11ySelectMenu = A11ySelectMenu;
+      
+    })( window, document, jQuery );
 
 
     window.app = function(){
       var a11yMenu = new window.App.A11yMenu( '#a11y-menu' );
+      var a11ySelectMenu = new window.App.A11ySelectMenu( '#a11y-quick-menu' );
     }
 
     document.addEventListener('DOMContentLoaded', app, false);
@@ -148,6 +181,10 @@
 
         <a class="js-menu-link a11y-kb-onlya" href="#content" accesskey="1">Jump to content (0)</a>
 
+        
+        <!-- Use of a link list. Problem is that the user has to tab through all links before getting to content -->
+        <!-- The good thing is that we don't rely on javascript -->
+        <!-- the access keys could ether be added here or direct on the element. -->
         <ul>
             <li><a class="js-menu-link a11y-kb-onlya" href="/" accesskey="h">Go to home page (h)</a></li>
             <li><a class="js-menu-link a11y-kb-onlya" href="/accessibility-page" accesskey="a">Go to accessibility page (a)</a></li>
@@ -159,29 +196,21 @@
             <li><a class="js-menu-link a11y-kb-onlya" href="#footer" accesskey="5">Jump to footer (6)</a></li>
             
         </ul>
-        <select id="">
-          <option value="x" accesskey="p">sd</option>
-          <option value="y">sd</option>
-          <option value="x">sd</option>
-          <option value="x">sd</option>
-          <option value="x">sd</option>
+
+        <!-- This method might be better since the user can tab in and out quickly. To expand use arrow keys  -->
+        <!-- Down side javascript has to controle the focus  -->
+        <label for="a11y-quick-menu"></label>
+        <select id="a11y-quick-menu">
+          <option value="/" accesskey="x">rick</option>
+          <option value="/accessibility-page" accesskey="q">Go to accessibility page (q)</option>
+          <option value="#a11y-menu" accesskey="6">Jump to quick menu (6)</option>
+          <option value="#content" accesskey="7">Jump to content (7)</option>
+          <option value="#main-menu" accesskey="8">Jump to main menu (8)</option>
+          <option value="#search-input" accesskey="9">Jump to search (9)</option>
+          <option value="#sidebar" accesskey="x">Jump to sidebar (x)</option>
+          <option value="#footer" accesskey="y">Jump to footer (y)</option>
         </select>
 
-        <select name="hello" id="">
-          <option value="x">sd</option>
-          <option value="y">sd</option>
-          <option value="x">sd</option>
-          <option value="x">sd</option>
-          <option value="x">sd</option>
-        </select>
-
-        <select name="hello" id="">
-          <option value="x">sd</option>
-          <option value="y">sd</option>
-          <option value="x">sd</option>
-          <option value="x">sd</option>
-          <option value="x">sd</option>
-        </select>
     </nav>
 
 
