@@ -14,7 +14,7 @@ http://www.evaluera.co.uk/
 
 
 
-## Color Contrast Analyzer
+### Color Contrast Analyzer
 https://chrome.google.com/webstore/detail/color-contrast-analyzer/dagdlcijhfbmgkjokkjicnnfimlebcll?hl=en
 
 **Chrome plugin**
@@ -25,7 +25,7 @@ Applies a mask to the page to highlihgt what areas are easy and hard to see.
 - Can test agains different levels e.g AA and AAA
 
 
-## a11y.css
+### a11y.css
 
 http://ffoodd.github.io/a11y.css/
 
@@ -38,7 +38,7 @@ http://ffoodd.github.io/a11y.css/
 - Not descriptive errors or learn more links. 
 
 
-## a11yTools Safari
+### a11yTools Safari
 
 http://pauljadam.com/extension.html
 
@@ -58,7 +58,7 @@ This tool is pretty extensive. A simple right click on a page and pick something
 - Only works in safari. 
 
 
-## Accessibility Developer Tools
+### Accessibility Developer Tools
 
 https://chrome.google.com/webstore/detail/accessibility-developer-t/fpkknkljclfencbdbgkenhalefipecmb?hl=en
 
@@ -74,7 +74,7 @@ Go to inspectort audit tab and run a test. works a bit similar to axe.
 - Can't higlight elements like axe. 
 
 
-## AATT PayPal
+### AATT PayPal
 
 https://github.com/paypal/AATT
 
@@ -87,7 +87,7 @@ Get testing into development.
 - (I haven't tested this yet)
 
 
-## CKEditor 4
+### CKEditor 4
 
 https://ckeditor.com/ckeditor-4/pricing/#accessibility-checker
 
