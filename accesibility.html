@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>accessibility</title>
+</head>
+<body>
+	
+	<h1>Mac VoiceOver Test</h1>
+	
+
+	<h3>Text standard</h3>
+
+	<label for="id-text">This is a label for text</label>
+	<input type="text" id="id-text">
+
+	<h3>Text with aria-label</h3>
+
+	<label for="id-text">This is a label for text</label>
+	<input type="text" id="id-text" aria-label="Custom aria label">
+	<p>The label tag replaces the label-tag</p>
+
+	<h3>Random aria-label</h3>
+
+	<p tabindex="0" aria-label="this is a paragraph with aria label">this text has a aria-label</p>
+
+	<h3>Select/dropdown</h3>
+
+	<label for="id-select">This is a label for select</label>
+	<select id="id-select">
+		<option value="1">one</option>
+		<option value="2">two</option>
+		<option value="3">three</option>
+	</select>
+	<p>The label of the select does not get read.</p>
+
+
+
+
+
+</body>
+</html>

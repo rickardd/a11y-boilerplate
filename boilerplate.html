@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+  <style>
+    .a11y-sr-only,
+    .a11y-kb-only {
+      border: 0;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    .a11y-kb-only:active,
+    .a11y-kb-only:focus {
+      clip: auto;
+      height: auto;
+      margin: 0;
+      overflow: visible;
+      position: static;
+      width: auto;
+    }
+
+    .tab-focus{
+      outline: 1px solid blue;
+    }
+
+    #a11y-menu{
+      padding: 24px;
+      background-color: #eee;
+    }
+
+    .test{
+      /*display: none;*/
+      background-color: red;
+    }
+
+  </style>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+  <script>
+
+    window.App = {};
+
+    ( function( win, doc, $ ) {
+
+      A11yMenu = function( idSelector ){
+        this.el = doc.querySelector( idSelector );
+        this.$el = $(this.el);
+        this.links = this.el.querySelectorAll('.js-menu-link');
+        this.hasFocus = false;
+        this.bind();
+      }
+      
+      A11yMenu.prototype.bind = function(){
+
+        var children = this.el.children;
+        for (var i = 0; i < this.el.childElementCount; i++) {
+
+            // this.hasFocus = false;
+
+            
+
+            children[i].addEventListener('blur', function( e ){
+              this.close();
+              this.hasFocus = false;
+            }.bind( this ));
+
+            children[i].addEventListener('focus', function( e ){
+              this.open();  
+              this.hasFocus = true;
+            }.bind( this ));
+        } 
+        
+        for (var i = 0; i < this.links.length; i++) {
+          this.links[i].addEventListener('focus', function( e ){
+            var targetEl = null;
+            if (!!e.target.getAttribute('href') && e.target.getAttribute('href').indexOf('#') === 0) {
+              targetEl = doc.querySelector( e.target.getAttribute('href') );          
+            }
+
+            if( !!targetEl ){
+              targetEl.classList.add('tab-focus');
+            }
+          }.bind(this));
+
+          this.links[i].addEventListener('blur', function( e ){
+
+            var targetEl = null;
+            if (!!e.target.getAttribute('href') && e.target.getAttribute('href').indexOf('#') === 0) {
+              targetEl = doc.querySelector( e.target.getAttribute('href') );          
+            }
+            
+            if( !!targetEl ){
+              targetEl.classList.remove('tab-focus');
+            }
+            
+          }.bind(this));
+        }
+        
+      }
+
+      // A11yMenu.prototype.handleOpenClose = function(){
+      //   console.log('open');
+      //   this.el.classList.remove('a11y-sr-only');
+      // }
+
+      A11yMenu.prototype.open = function(){
+        console.log('open');
+        // this.hasFocus = true;
+        this.el.classList.remove('a11y-sr-only');
+      }
+
+      A11yMenu.prototype.close = function(){
+        console.log('close');
+        if ( !this.hasFocus ) {
+          this.el.classList.add('a11y-sr-only');
+          // this.hasFocus = false;
+        }
+
+        debugger;
+      }
+
+      window.App.A11yMenu = A11yMenu;
+      
+    })( window, document, jQuery )
+
+
+    window.app = function(){
+      var a11yMenu = new window.App.A11yMenu( '#a11y-menu' );
+    }
+
+    document.addEventListener('DOMContentLoaded', app, false);
+
+  </script>
+</head>
+<body>
+
+    <nav role="navigation" class="a11y-sr-only" id="a11y-menu" tabindex="1">
+        <h2 class="a11y-sr-onlys">Quick menu</h2>
+
+        <a class="js-menu-link a11y-kb-onlya" href="#content" accesskey="1">Jump to content (0)</a>
+
+        <ul>
+            <li><a class="js-menu-link a11y-kb-onlya" href="/" accesskey="h">Go to home page (h)</a></li>
+            <li><a class="js-menu-link a11y-kb-onlya" href="/accessibility-page" accesskey="a">Go to accessibility page (a)</a></li>
+            <li><a class="js-menu-link a11y-kb-onlya" href="#a11y-menu" accesskey="0">Jump to quick menu (4)</a></li>
+            <li><a class="js-menu-link a11y-kb-onlya" href="#content" accesskey="1">Jump to content (0)</a></li>
+            <li><a class="js-menu-link a11y-kb-onlya" href="#main-menu" accesskey="2">Jump to main menu (1)</a></li>
+            <li><a class="js-menu-link a11y-kb-onlya" href="#search-input" accesskey="3">Jump to search (3)</a></li>
+            <li><a class="js-menu-link a11y-kb-onlya" href="#sidebar" accesskey="4">Jump to sidebar (5)</a></li>
+            <li><a class="js-menu-link a11y-kb-onlya" href="#footer" accesskey="5">Jump to footer (6)</a></li>
+            
+        </ul>
+        <select id="">
+          <option value="x" accesskey="p">sd</option>
+          <option value="y">sd</option>
+          <option value="x">sd</option>
+          <option value="x">sd</option>
+          <option value="x">sd</option>
+        </select>
+
+        <select name="hello" id="">
+          <option value="x">sd</option>
+          <option value="y">sd</option>
+          <option value="x">sd</option>
+          <option value="x">sd</option>
+          <option value="x">sd</option>
+        </select>
+
+        <select name="hello" id="">
+          <option value="x">sd</option>
+          <option value="y">sd</option>
+          <option value="x">sd</option>
+          <option value="x">sd</option>
+          <option value="x">sd</option>
+        </select>
+    </nav>
+
+
+
+
+    <header role="banner">
+        <a href="/" rel="home" title="to homepage">
+            <!-- link to home: http://microformats.org/wiki/rel-home -->
+            <h1>
+                <!-- <img alt="A11Y Boilerplate"
+                     src="a11y-boilerplate.svg"
+                     onerror="this.src='a11y-boilerplate.png;'"
+                     width="200" height="200"
+                    /> -->
+                <!-- vector image with bitmap fallback: https://twitter.com/scottjehl/status/369190249437483008 -->
+                <!-- specify image dimensions for performance: http://www.feedthebot.com/pagespeed/image-dimensions.html -->
+
+                <img alt="A11Y Boilerplate"
+                     src="http://placekitten.com/g/200/300"
+                     width="200" height="200"
+                    />
+
+            </h1>
+
+            <nav role="navigation">
+                <h2 class="a11y-sr-only">Primary Nav</h2>
+                <ul id="main-menu">
+                    <li><a href="/">Page Foo Bar</a></li>
+                    <li><a href="/">Page Foo Bar</a></li>
+                    <li><a href="/">Page Foo Bar</a></li>
+                    <li><a href="/">Page Foo Bar</a></li>
+                    <li><a href="/">Page Foo Bar</a></li>
+                </ul>
+            </nav>
+
+        </a>
+
+
+        <!-- Mark search controls for enhanced a11y: http://www.w3.org/TR/wai-aria/roles#search -->
+        <div role="search" class="search-menu">
+            <a id="search" rel="search" href="https://example.com/search">
+                <span class="icon-search"></span>
+                <span class="a11y-sr-only">Search</span>
+            </a>
+            <form method="GET" action="https://www.example.com/search" class="search-menu-form">
+                <label>
+                    <span class="a11y-sr-only">Keywords</span>
+                    <input type="search" name="q" placeholder="Enter your search" id="search-input" />
+                </label>
+                <button>
+                    <span class="icon-search"></span>
+                    <span class="a11y-sr-only">Search on example.com</span>
+                </button>
+            </form>
+        </div>
+
+    </header>
+
+    <main id="content" role="main" tabindex="-1">
+        <!-- tabindex fixes focus issue, alternatively use generic script: http://www.nczonline.net/blog/2013/01/15/fixing-skip-to-content-links/ -->
+
+        <article role="article">
+          <h2>Resources</h2>
+          <ul>
+            <li><a href="https://dequeuniversity.com/rules/axe/2.4/">Axe rules</a></li>
+          </ul>
+          
+        </article>
+        
+        <section role="region">
+          <article role="article">
+
+              <header role="header">
+                <h1>Common things to be aware of</h1>
+              </header>
+
+              <h2>Links</h2>
+
+              <ul>
+                <li></li>
+              </ul>
+
+              <h2>Titles</h2>
+
+              <ul>
+                <li>Titles are not always read by the screen readers. In Jaws you have to manually set it. Only if no link text is provided JAWS will read the title. So a <strong>read more</strong> with a <strong>title</strong> does not make it valid </li>
+              </ul>
+
+
+              <h2>Form</h2>
+
+              <ul>
+                <li>aria-required</li>
+                <li>aria-invalid</li>
+              </ul>
+
+              
+
+
+        
+              
+          </article>
+        </section>
+
+    </main>
+
+    <aside role="complementary" id="sidebar">
+      
+      <nav role="navigation">
+          <h2 class="a11y-sr-only">Related content menu</h2>
+          <ul>
+              <li><a href="/">Page Foo Bar</a></li>
+              <li><a href="/">Page Foo Bar</a></li>
+              <li><a href="/">Page Foo Bar</a></li>
+              <li><a href="/">Page Foo Bar</a></li>
+              <li><a href="/">Page Foo Bar</a></li>
+          </ul>
+      </nav>
+
+    </aside>
+
+    <footer role="contentinfo" id="footer">
+        Footer needs a role e.g <code>role="contentinfo"</code>  since it does not have an implicit role assigned. 
+    </footer>
+
+    <!-- Include scripts here. Concatenate & minify for performance: https://developers.google.com/speed/docs/insights/MinifyResources -->
+</body>
+</html>
