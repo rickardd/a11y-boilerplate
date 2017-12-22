@@ -1,5 +1,23 @@
 # a11y 
 
+## CODE EDITOR
+
+### Sublime
+
+**Accessibility**
+https://packagecontrol.io/packages/Accessibility
+
+Intelesence for roles and available aria attributes. 
+
+- fantastic to see what's available
+- downside. Just a long list of all options. 
+
+**W3CValidators**
+https://packagecontrol.io/packages/W3CValidators
+
+- Really good validation. 
+- Can't deal with ``<% template tags %>``
+
 ## TOOLS
 
 

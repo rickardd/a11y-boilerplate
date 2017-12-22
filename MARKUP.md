@@ -61,3 +61,54 @@ If presented as a list but not list markup
   <div role="listitem">third item</div>
 </div>
 ```
+
+
+## aria-labeledby for each section of the page. 
+
+See full example. 
+https://www.w3.org/WAI/tutorials/page-structure/example/
+
+```
+<nav aria-labelledby="mainnavheader">
+  <h2 id="mainnavheader">Navigation Menu</h2>
+    ...
+```
+
+```
+<nav aria-labelledby="tocheader">
+  <h3 id="tocheader">Table of Contents</h3>
+    ...
+```
+
+```
+<aside aria-labelledby="relatedheader">
+  <h3 id="relatedheader">Related Articles</h3>
+    ...
+```
+
+and maybe just for the screen reader
+```
+<nav aria-labelledby="mainmenulabel">
+  <h2 id="mainmenulabel" class="visuallyhidden">Main Menu</h2>
+</nav>
+```
+
+
+## Bread crumbs
+
+https://gist.github.com/jonathantneal/4037764
+
+```
+// css
+[aria-label="breadcrumbs"] [aria-hidden="true"]:after {
+  content: "/";
+}
+// html
+<nav role="navigation" aria-label="breadcrumbs">
+  <a href="/">Home</a>
+  <span aria-hidden="true"></span>
+  <a href="/library">Library</a>
+  <span aria-hidden="true"></span>
+  <a href="">Data</a>
+</nav>
+```
