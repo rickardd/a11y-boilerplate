@@ -5,11 +5,12 @@
 - del (for content that got deleted): I am an avid cyclist, <del cite="http://shayhowe.com" datetime="2012-07-01">skateboarder</del> and designer.
 - s: (for content that’s not longer used e.g prise change) <s>$24.99</s> $19.99
 - Time
-    - <time>2011-08-24</time>
-    - <time datetime="2011-08-24" pubdate>August 24th, 2011</time>
-    - <time datetime="15:00">3pm</time>
-    - <time datetime="2011-08-24T15:00">August 24th, 2011 at 3pm</time>
+    - ``<time>2011-08-24</time>``
+    - ``<time datetime="2011-08-24" pubdate>August 24th, 2011</time>``
+    - ``<time datetime="15:00">3pm</time>``
+    - ``<time datetime="2011-08-24T15:00">August 24th, 2011 at 3pm</time>``
 - Adress
+```
 <address>
   <strong>Shay Howe</strong><br>
   <a href="http://learn.shayhowe.com">http://learn.shayhowe.com</a><br>
@@ -19,16 +20,20 @@
   Chicago, IL 60654<br>
   USA  
 </address>
+```
 Code
     - Inline: Use the <code>article</code> element.
-    - Block: <pre><code>body {
+    - Block: 
+      ```
+      <pre><code>body {
           color: #666;
           font: 14px/20px Arial, sans-serif;
         }</code></pre>
+      ```
 - wbr: word break.  http://shay<wbr>howe.com
 - Cite, q, quote
-- Small: <small>&copy; 2012 Shay Howe</small>
-- Download Attribute <a href="twitter-logo.png" download="Logo">Twitter Logo</a>
+- Small: ``<small>&copy; 2012 Shay Howe</small>``
+- Download Attribute ``<a href="twitter-logo.png" download="Logo">Twitter Logo</a>``
 - 
 
 
